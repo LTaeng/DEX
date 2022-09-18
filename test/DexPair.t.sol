@@ -14,7 +14,7 @@ contract LPTokenTest is Test {
     address internal constant alice = address(1);
     address internal constant bob = address(2);
     address internal constant carol = address(3);
-    address internal constant dave = address(3);
+    address internal constant dave = address(4);
 
     function setUp() public {
         coinX = new ERC20Mintable("Coin X", "COX");
