@@ -41,10 +41,11 @@ contract DexPair is ERC20 {
         uint reserveInput = IERC20(inputToken).balanceOf(address(this));
         uint reserveOutput = IERC20(outputToken).balanceOf(address(this));
 
-        value = value + (value / 10);
         require(IERC20(inputToken).balanceOf(msg.sender) >= value, "DEX: Over than your balances");
         outputAmount = reserveOutput - k / (reserveInput + value);
         require(outputAmount >= minimum, "DEX: lower than minimum output Tokens");
+
+        value = value + (value / 10);
 
         IERC20(inputToken).transferFrom(msg.sender, address(this), value);
         IERC20(outputToken).transfer(msg.sender, outputAmount);
