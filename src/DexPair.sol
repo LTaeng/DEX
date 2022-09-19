@@ -47,9 +47,9 @@ contract DexPair is ERC20 {
         outputAmount = reserveOutput - k / (reserveInput + input);
         require(outputAmount >= minimum, "DEX: lower than minimum output Tokens");
 
-
         IERC20(inputToken).transferFrom(msg.sender, address(this), value);
         IERC20(outputToken).transfer(msg.sender, outputAmount);
+        k = (reserveInput + value) * (reserveOutput - outputAmount);
     }
 
 
