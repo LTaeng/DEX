@@ -101,15 +101,15 @@ contract LPTokenTest is Test {
         uint beforeYDex = coinY.balanceOf(address(dexPair));
 
         vm.startPrank(carol);
-        coinX.approve(address(dexPair), 22 ether);
+        coinX.approve(address(dexPair), 20 ether);
         
         uint output = dexPair.swap(20 ether, 0, 20 ether);
         vm.stopPrank();
 
-        assertEq(coinX.balanceOf(address(carol)), beforeXCarol - 22 ether);
+        assertEq(coinX.balanceOf(address(carol)), beforeXCarol - 20 ether);
         assertEq(coinY.balanceOf(address(carol)), beforeYCarol + output);
 
-        assertEq(coinX.balanceOf(address(dexPair)), beforeXDex + 22 ether);
+        assertEq(coinX.balanceOf(address(dexPair)), beforeXDex + 20 ether);
         assertEq(coinY.balanceOf(address(dexPair)), beforeYDex - output);
     }
 
@@ -129,16 +129,16 @@ contract LPTokenTest is Test {
 
 
         vm.startPrank(dave);
-        coinY.approve(address(dexPair), 110 ether);
+        coinY.approve(address(dexPair), 100 ether);
         
         uint output = dexPair.swap(0 ether, 100 ether, 4 ether);
         vm.stopPrank();
 
         assertEq(coinX.balanceOf(address(dave)), beforeXDave + output);
-        assertEq(coinY.balanceOf(address(dave)), beforeYDave - 110 ether);
+        assertEq(coinY.balanceOf(address(dave)), beforeYDave - 100 ether);
 
         assertEq(coinX.balanceOf(address(dexPair)), beforeXDex - output);
-        assertEq(coinY.balanceOf(address(dexPair)), beforeYDex + 110 ether);
+        assertEq(coinY.balanceOf(address(dexPair)), beforeYDex + 100 ether);
     }
 
     function testFailSwap1() public {
