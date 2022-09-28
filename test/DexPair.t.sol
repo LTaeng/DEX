@@ -186,6 +186,25 @@ contract LPTokenTest is Test {
         assertEq(coinY.balanceOf(address(alice)) > 300 ether, true);
     }
 
+    function testBugFix() public {
+        vm.startPrank(alice);
+        coinX.approve(address(dexPair), 100 ether);
+        coinY.approve(address(dexPair), 100 ether);
+
+        dexPair.addLiquidity(100 ether, 100 ether, 0);
+        vm.stopPrank();
+
+        vm.startPrank(dave);
+        coinY.approve(address(dexPair), 1000);
+        
+        uint output = dexPair.swap(0 ether, 999, 0);
+        vm.stopPrank();
+
+        console2.log(output);
+
+        assertEq(output, 999 - 1);
+    }
+
 
     receive() external payable {}
 }

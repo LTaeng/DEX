@@ -43,7 +43,9 @@ contract DexPair is ERC20 {
 
         require(IERC20(inputToken).balanceOf(msg.sender) >= value, "DEX: Over than your balances");
 
-        uint input = value - (value / 1000);
+        uint fee = (value > 1000) ? value / 1000 : 1;
+        uint input = value - fee;
+
         outputAmount = reserveOutput - k / (reserveInput + input);
         require(outputAmount >= minimum, "DEX: lower than minimum output Tokens");
 
