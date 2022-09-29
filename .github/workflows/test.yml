@@ -1,4 +1,4 @@
-name: test
+name: patch
 
 on: workflow_dispatch
 
