@@ -38,8 +38,12 @@ contract Dex is ERC20 {
 
         uint fee = (value > 1000) ? value / 1000 : 1;
         uint input = value - fee;
+        uint divider = (reserveInput + input);
 
         outputAmount = reserveOutput - k / (reserveInput + input);
+        if (k % divider != 0)
+            outputAmount -= 1;
+
         require(outputAmount >= minimum, "DEX: lower than minimum output Tokens");
 
         inputToken.transferFrom(msg.sender, address(this), value);
