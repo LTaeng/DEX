@@ -1,6 +1,6 @@
-name: patch
+name: test
 
-on: workflow_dispatch
+on: push
 
 env:
   FOUNDRY_PROFILE: ci
