@@ -40,7 +40,7 @@ contract Dex is ERC20 {
         uint input = value - fee;
         uint divider = (reserveInput + input);
 
-        outputAmount = reserveOutput - k / (reserveInput + input);
+        outputAmount = reserveOutput - k / divider;
         if (k % divider != 0)
             outputAmount -= 1;
 
